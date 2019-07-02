@@ -1,24 +1,50 @@
 `include "source.v"
 `include "vm.v"
 
-module tb;
-	wire x,y;
-	reg clock, reset;
-	source source(.x(x));
-	vm vm(.x(x), .y(y), .clock(clock), .reset(reset));
-	
-	initial begin
-		$dumpfile("vm.vcd");  //especifica em qual arquivo serao armazenadas as formas de onda
-		$dumpvars;  //especifica para colocar todos os sinais no add.vcd 
-		reset=0;
-		clock = 0;
-		#5;
+module main;
 
-		reset=1;
-		#5;
-		#150 $finish;
-	end
+	reg clock,reset_n;
+	wire w_escolher,w_inserir_dinheiro,
+		w_dar_troco;
+	wire[7:0] w_produto_escolhido, 
+		w_dinheiro_inserido,w_valor_troco,
+		w_produto_vendido,w_carteira;
+	wire[3:0] w_dinheiro_inserido_c, w_dinheiro_inserido_d, 
+		w_dinheiro_inserido_u;
 	
+	source source(.escolher(w_escolher), 
+				.inserir_dinheiro(w_inserir_dinheiro), 
+				.dar_troco(w_dar_troco),
+				.produto_escolhido(w_produto_escolhido),
+				.dinheiro_inserido(w_dinheiro_inserido),
+				.clock(clock),
+				.reset_n(reset_n));
+				
+	vm vm(.escolher(w_escolher), 
+			.inserir_dinheiro(w_inserir_dinheiro), 
+			.dar_troco(w_dar_troco), 							
+			.produto_escolhido(w_produto_escolhido),
+			.dinheiro_inserido(w_dinheiro_inserido),
+			.produto_vendido(w_produto_vendido),
+			.carteira(w_carteira),
+			.valor_troco(w_valor_troco),
+			.dinheiro_inserido_c(w_dinheiro_inserido_c),
+			.dinheiro_inserido_d(w_dinheiro_inserido_d),
+			.dinheiro_inserido_u(w_dinheiro_inserido_u),
+			.reset_n(reset_n),
+			.clock(clock));
+
+	initial begin
+		$dumpfile("vm.vcd");
+		$dumpvars;
+
+		clock = 0;
+		reset_n= 0;
+		#10
+		reset_n = 1;
+		#300 $finish;
+	end
 	always
-	 # 5 clock = ~clock;
+		# 1 clock = ~clock;
+		
 endmodule

@@ -1,134 +1,134 @@
-module vm(x , y, clock,reset);
+module vm(escolher,inserir_dinheiro,dar_troco,
+produto_escolhido, dinheiro_inserido, produto_vendido,
+carteira,valor_troco,dinheiro_inserido_c, dinheiro_inserido_d,
+dinheiro_inserido_u, reset_n,clock);
 
-	input clock,reset;
+	input escolher, inserir_dinheiro, dar_troco;
+	input[7:0] produto_escolhido, dinheiro_inserido;
+	input reset_n;
+	input clock;
+	output reg[7:0] produto_vendido, carteira, valor_troco;
+	output reg[3:0]	dinheiro_inserido_c, dinheiro_inserido_d, dinheiro_inserido_u;
 	
-	input [1:0] LEDR1, LEDR2, LEDR3, LEDR4, LEDR5
-	//Leds (SW1 to SW5)
-	input [1:0] SW1,SW2,SW3,SW4,SW5;
-	//SW1 = R$0,05
-	//SW2 = R$0,10
-	//SW3 = R$0,25
-	//SW4 = R$0,50
-	//SW5 = R$1,00
+	input[11:0] moedas_inseridas;
+	output reg[11:0] moedas_carteira; //11 bits -> R$1,00[11:8] R$0,50[7:4] R$0,25[3:0]
 	
-	input [1:0] SW9;
-	//SW9 = Give up
+	reg[1:0] estado_atual;
+	reg[7:0] price;
+	reg[11:0] cdu;
 	
-	input [1:0] KEY0, KEY1;
-	//KEY0 = Change selection
-	//KEY1 = Select product
+	parameter espera=0,start=1,insert_money=2,give_change=3;
 	
-	output [0:6] HEX5, HEX4, HEX3, HEX2, HEX1, HEX0;
-	output reg y;
-	
-	reg [7:0] money,change;
-	
-	reg [1:0] state, previous_state; 
-	parameter select=0,insert_money=1,give_change=2,
-			chocolate = 1.20;
-			coffee = 1.00;
-			juice = 0.70;
-	
-	always @(posedge clock, negedge reset) begin
-		if (~reset) begin
-		state<=select;
-		previous_state<=select;
-		money7seg digit(0, HEX0,HEX1,HEX2);
+	//parte combinacional
+	always @(posedge clock, negedge reset_n)
+		if(~reset_n) begin 
+			price = 0;
+			carteira = 0;
+			valor_troco = 0;
+			dinheiro_inserido_c = 0;
+			dinheiro_inserido_d = 0;
+			dinheiro_inserido_u = 0;
+			produto_vendido = 0;
+			cdu=0;
 		end
-		else begin
-			case (state)
-				select: begin
-					if (x==1) state<=s11;
-					else state<=inicio;
-					y<=0;
+		else
+		case(estado_atual)
+			espera:begin
+				//carteira não é zerada
+				price = 0;
+				valor_troco = 0;
+				dinheiro_inserido_c = 0;
+				dinheiro_inserido_d = 0;
+				dinheiro_inserido_u = 0;
+				produto_vendido = 0;
+				cdu=0;			
+			end
+			start:begin
+				case(produto_escolhido)
+					1: begin
+						price = 50;
+					end
+					2: begin
+						price = 75;
+					end
+					3: begin
+						price = 100;
+					end				
+				endcase							
+			end			
+			insert_money:begin
+				cdu = bin2bcd(dinheiro_inserido);
+				dinheiro_inserido_c = cdu[11:8];
+				dinheiro_inserido_d = cdu[7:4];
+				dinheiro_inserido_u = cdu[3:0];
+			end
+			give_change:begin
+				if(dinheiro_inserido>price)
+				begin
+					valor_troco = dinheiro_inserido - price;
+					carteira = price;
+					produto_vendido = escolher;
 				end
-				insert_money: begin
-					if (SW1==1) begin
-						LEDR1 = 1;
-						money += 5;
-						money7seg digit(money, HEX0,HEX1,HEX2);
-						LEDR1 = 0;						
-					end
-					if (SW2==1) begin
-						LEDR2 = 1;
-						money += 10;
-						LEDR2 = 0;						
-					end
-					if (SW3==1) begin
-						LEDR3 = 1;
-						money += 25;
-						LEDR3 = 0;						
-					end
-					if (SW4==1) begin
-						LEDR4 = 1;
-						money += 50;
-						LEDR4 = 0;						
-					end
-					if (SW5==1) begin
-						LEDR5 = 1;
-						money += 100;
-						LEDR5 = 0;						
-					end
-				end
-				s11: begin
-					if(x==0) state<=s110;
-					y<=0; 
-				end
-				s110: begin
-					if(x==1) begin
-					state<=s1;
-					y<=1;
-					end
-					else begin
-					state<=inicio;
-					y<=0;
-					end
-				end
-			endcase
-		previous_state<=state;
-		end
-	end  
- 
-endmodule
+			end
+			default:begin
 
-module money7seg(value,ds0,ds1,ds2);
-
-	
-	
-	bcd7seg digit2 (ds0, HEX2);
-	bcd7seg digit1 (ds1, HEX1);
-	bcd7seg digit0 (ds2, HEX0);	
-endmodule
-
-module bcd7seg (bcd, display);
-	input [3:0] bcd;
-	output [0:6] display;
-	reg [0:6] display;
-	/*
-	 *       0  
-	 *      ---  
-	 *     |   |
-	 *    5|   |1
-	 *     | 6 |
-	 *      ---  
-	 *     |   |
-	 *    4|   |2
-	 *     |   |
-	 *      ---  
-	 *       3  
-	 */
-	always @ (bcd)
-		case (bcd)
-			4'h0: display = 7'b0000001;
-			4'h1: display = 7'b1001111;
-			4'h2: display = 7'b0010010;
-			4'h3: display = 7'b0000110;
-			4'h4: display = 7'b1001100;
-			4'h5: display = 7'b0100100;
-			4'h6: display = 7'b1100000;
-			4'h7: display = 7'b0001111;
-			4'h8: display = 7'b0000000;
-			4'h9: display = 7'b0001100;
-			default: display = 7'b1111111;
+			end
 		endcase
+		
+	//o comando <= é uma atribuição não bloqueante.
+	//significa que todos os lados direitos de todos os <= serão salvos ao entrar na função
+	//de forma que se eu quisesse trocar os valores de x e y, poderia escrever
+	//x<=y;y<=x
+		
+	//parte sequencial
+	always @(posedge clock, negedge reset_n)
+		if(~reset_n) begin 
+			estado_atual<=espera;
+		end
+		//só entra na máquina de estados se
+		//o reset_n for zero ao menos uma vez
+		else case(estado_atual)
+			espera:begin
+				if(escolher) estado_atual <= start;
+			end
+			start:begin
+				if(inserir_dinheiro) estado_atual <= insert_money;
+			end
+			insert_money:begin
+				if(dar_troco & (dinheiro_inserido >= price)) 
+				estado_atual <= give_change;
+			end
+			give_change:begin
+				if(escolher) estado_atual <= start;
+			end
+			default:begin
+				estado_atual <= espera;
+			end
+		endcase
+		
+	function automatic [11:0] bin2bcd;
+
+		input [7:0] bin;
+		reg [11:0] bcd; 
+		reg [3:0] i;
+		
+		begin		
+			//Double Dabble algorithm
+			bcd = 0;
+			for (i = 0; i < 8; i = i+1)
+				begin
+					bcd = {bcd[10:0],bin[7-i]}; //concatenation
+						
+					//if a hex digit of 'bcd' is more than 4, add 3 to it.  
+					if(i < 7 && bcd[3:0] > 4) 
+						bcd[3:0] = bcd[3:0] + 3;
+					if(i < 7 && bcd[7:4] > 4)
+						bcd[7:4] = bcd[7:4] + 3;
+					if(i < 7 && bcd[11:8] > 4)
+						bcd[11:8] = bcd[11:8] + 3;  
+				end
+			bin2bcd = bcd;
+		end
+	endfunction
+
 endmodule
