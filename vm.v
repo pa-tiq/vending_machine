@@ -21,13 +21,17 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 	reg[11:0] cdu;
 	reg[7:0] moedas_25,moedas_50,moedas_100;
 	reg[23:0] moedas_troco;
-	reg[1:0] flag_sem_troco_devolver_dinheiro_inserido
+	reg[1:0] flag_sem_troco_devolver_dinheiro_inserido;
+	reg[1:0] flag_dinheiro_insuficiente;
+	
+	reg[1:0] executou_start, executou_insert_money, executou_give_change;
 	
 	parameter espera=0,start=1,insert_money=2,give_change=3;
 	
 	//parte combinacional
 	always @(posedge clock, negedge reset_n)
 		if(~reset_n) begin
+			flag_dinheiro_insuficiente = 0;
 			flag_sem_troco_devolver_dinheiro_inserido = 0;
 			price = 0;
 			carteira = 0;
@@ -39,11 +43,15 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 			cdu=0;
 			moedas_carteira = 0;
 			moedas_troco = 0;
+			executou_start = 0;
+			executou_insert_money = 0;
+			executou_give_change = 0;
 		end
 		else
 		case(estado_atual)
 			espera:begin
 				//carteira não é zerada
+				flag_dinheiro_insuficiente = 0;
 				flag_sem_troco_devolver_dinheiro_inserido = 0;
 				price = 0;
 				valor_troco = 0;
@@ -52,50 +60,68 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 				dinheiro_inserido_u = 0;
 				produto_vendido = 0;
 				moedas_troco = 0;
-				cdu=0;			
+				cdu=0;	
+				executou_start = 0;
+				executou_insert_money = 0;
+				executou_give_change = 0;				
 			end
 			start:begin
-				case(produto_escolhido)
-					1: begin
-						price = 50;
-					end
-					2: begin
-						price = 75;
-					end
-					3: begin
-						price = 100;
-					end				
-				endcase							
+				if(!executou_start) begin
+					case(produto_escolhido)
+						1: begin
+							price = 50;
+						end
+						2: begin
+							price = 75;
+						end
+						3: begin
+							price = 100;
+						end				
+					endcase
+				end
+				executou_start = 1;
 			end			
 			insert_money:begin
-				cdu = bin2bcd(dinheiro_inserido);
-				dinheiro_inserido_c = cdu[11:8];
-				dinheiro_inserido_d = cdu[7:4];
-				dinheiro_inserido_u = cdu[3:0];
-				
-				moedas_carteira = moedas_carteira + moedas_inseridas;
+				if(!executou_insert_money) begin
+					cdu = bin2bcd(dinheiro_inserido);
+					dinheiro_inserido_c = cdu[11:8];
+					dinheiro_inserido_d = cdu[7:4];
+					dinheiro_inserido_u = cdu[3:0];
+					moedas_carteira = moedas_carteira + moedas_inseridas;
+				end
+				executou_insert_money = 1;
 			end
 			give_change:begin
-				if(dinheiro_inserido>price)
-				begin
-					valor_troco = dinheiro_inserido - price;
-					moedas_troco = calcular_moedas_troco(valor_troco,moedas_carteira);
-					if(moedas_troco != 0) begin
-						moedas_carteira = moedas_carteira - moedas_troco;
-						carteira = carteira + price;
-						produto_vendido = produto_escolhido;
+				if(!executou_give_change) begin
+					if(dinheiro_inserido>=price) begin				
+						valor_troco = dinheiro_inserido - price;
+						if(valor_troco>0) moedas_troco = calcular_moedas_troco(valor_troco,moedas_carteira);
+						else moedas_troco = moedas_inseridas;
+						if(moedas_troco != 0) begin
+							moedas_carteira = moedas_carteira - moedas_troco;
+							carteira = carteira + price;
+							produto_vendido = produto_escolhido;
+						end
+						else begin
+							flag_sem_troco_devolver_dinheiro_inserido = 1;
+							valor_troco = dinheiro_inserido;
+							moedas_carteira = moedas_carteira - moedas_inseridas;
+							moedas_troco = moedas_inseridas;
+							produto_vendido = 0;
+						end
 					end
 					else begin
-						flag_sem_troco_devolver_dinheiro_inserido = 1;
+						flag_dinheiro_insuficiente = 1;
 						valor_troco = dinheiro_inserido;
 						moedas_carteira = moedas_carteira - moedas_inseridas;
 						moedas_troco = moedas_inseridas;
 						produto_vendido = 0;
 					end
 				end
+				executou_give_change = 1;
 			end
 			default:begin
-
+	
 			end
 		endcase
 		
@@ -111,24 +137,25 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 		end
 		//só entra na máquina de estados se
 		//o reset_n for zero ao menos uma vez
-		else case(estado_atual)
-			espera:begin
-				if(escolher) estado_atual <= start;
-			end
-			start:begin
-				if(inserir_dinheiro) estado_atual <= insert_money;
-			end
-			insert_money:begin
-				if(dar_troco & (dinheiro_inserido >= price)) 
-				estado_atual <= give_change;
-			end
-			give_change:begin
-				if(escolher) estado_atual <= start;
-			end
-			default:begin
-				estado_atual <= espera;
-			end
-		endcase
+		else begin
+			case(estado_atual)
+				espera:begin
+					if(escolher) estado_atual <= start;
+				end
+				start:begin
+					if(inserir_dinheiro && executou_start) estado_atual <= insert_money;
+				end
+				insert_money:begin
+					if(dar_troco && executou_insert_money) estado_atual <= give_change;
+				end
+				give_change:begin
+					if(escolher && executou_give_change) estado_atual <= espera;
+				end
+				default:begin
+					estado_atual <= espera;
+				end
+			endcase
+		end
 		
 	function automatic [23:0] calcular_moedas_troco;
 		

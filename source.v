@@ -48,7 +48,7 @@ produto_escolhido, dinheiro_inserido, clock, reset_n,moedas_inseridas);
 	inserir_dinheiro=0;
 	dar_troco=1;
 	
-	#10;
+	#30;
 	
 	//segunda compra compra
 	//dinheiro inserido = R$1,00
