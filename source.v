@@ -2,9 +2,9 @@ module source(escolher, inserir_dinheiro, dar_troco,
 produto_escolhido, dinheiro_inserido, clock, reset_n,moedas_inseridas);
 
 	input clock, reset_n;
-	output reg escolher, inserir_dinheiro, dar_troco;
+	output reg[1:0] escolher, inserir_dinheiro, dar_troco;
 	output reg[7:0] produto_escolhido, dinheiro_inserido;
-	output reg[11:0] moedas_inseridas;
+	output reg[23:0] moedas_inseridas;
 	
 	initial begin 
 
@@ -40,7 +40,7 @@ produto_escolhido, dinheiro_inserido, clock, reset_n,moedas_inseridas);
 	dinheiro_inserido = 150;
 	moedas_inseridas[7:0] = 0; //0 moedas de R$0,25
 	moedas_inseridas[15:8] = 1; //1 moeda de R$0,50
-	moedas_inseridas[16:23] = 1; //1 moeda de R$1,00
+	moedas_inseridas[23:16] = 1; //1 moeda de R$1,00
 	
 	#10;
 	
@@ -83,7 +83,7 @@ produto_escolhido, dinheiro_inserido, clock, reset_n,moedas_inseridas);
 	dinheiro_inserido = 100;
 	moedas_inseridas[7:0] = 2; //2 moedas de R$0,25
 	moedas_inseridas[15:8] = 1; //1 moeda de R$0,50
-	moedas_inseridas[16:23] = 0; //0 moeda de R$1,00
+	moedas_inseridas[23:16] = 0; //0 moeda de R$1,00
 	
 	#10;
 	

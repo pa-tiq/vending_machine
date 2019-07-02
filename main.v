@@ -4,7 +4,7 @@
 module main;
 
 	reg clock,reset_n;
-	wire w_escolher,w_inserir_dinheiro,
+	wire[1:0]w_escolher,w_inserir_dinheiro,
 		w_dar_troco;
 	wire[7:0] w_produto_escolhido, 
 		w_dinheiro_inserido,w_valor_troco,
