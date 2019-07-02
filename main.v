@@ -11,6 +11,7 @@ module main;
 		w_produto_vendido,w_carteira;
 	wire[3:0] w_dinheiro_inserido_c, w_dinheiro_inserido_d, 
 		w_dinheiro_inserido_u;
+	wire[23:0] w_moedas_inseridas, w_moedas_carteira;
 	
 	source source(.escolher(w_escolher), 
 				.inserir_dinheiro(w_inserir_dinheiro), 
@@ -18,7 +19,8 @@ module main;
 				.produto_escolhido(w_produto_escolhido),
 				.dinheiro_inserido(w_dinheiro_inserido),
 				.clock(clock),
-				.reset_n(reset_n));
+				.reset_n(reset_n),
+				.moedas_inseridas(w_moedas_inseridas));
 				
 	vm vm(.escolher(w_escolher), 
 			.inserir_dinheiro(w_inserir_dinheiro), 
@@ -32,7 +34,9 @@ module main;
 			.dinheiro_inserido_d(w_dinheiro_inserido_d),
 			.dinheiro_inserido_u(w_dinheiro_inserido_u),
 			.reset_n(reset_n),
-			.clock(clock));
+			.clock(clock),
+			.moedas_inseridas(w_moedas_inseridas),
+			.moedas_carteira(w_moedas_carteira));
 
 	initial begin
 		$dumpfile("vm.vcd");
