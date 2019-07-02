@@ -20,6 +20,7 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 	reg[7:0] price;
 	reg[11:0] cdu;
 	reg[7:0] moedas_25,moedas_50,moedas_100;
+	reg[23:0] moedas_troco;
 	
 	parameter espera=0,start=1,insert_money=2,give_change=3;
 	
@@ -78,8 +79,13 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 				if(dinheiro_inserido>price)
 				begin
 					valor_troco = dinheiro_inserido - price;
-					carteira = carteira + price;
-					produto_vendido = escolher;
+					moedas_troco = calcular_moedas_troco();
+					if(moedas_troco != 0)
+					begin
+						moedas_carteira = moedas_carteira - moedas_troco;
+						carteira = carteira + price;
+						produto_vendido = escolher;
+					end
 				end
 			end
 			default:begin
@@ -118,19 +124,32 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 			end
 		endcase
 		
-	function automatic [23:0] moedas_troco;
+	function automatic [23:0] calcular_moedas_troco;
 
-		reg[7:0] moedas_25,moedas_50,moedas_100;
+		reg [23:0] moedas;
 		reg [3:0] i,j,k;
 		
-		begin		
-			for (i = 0; i < moedas_carteira[7:0]; i = i+1)
+		begin
+			for (i = 0; i < moedas_carteira[23:16]; i = i+1)
 			begin
-				for (j = 0; i < moedas_carteira[7:0]; i = i+1)
+				for (j = 0; j < moedas_carteira[15:8]; j = j+1)
 				begin
-					
+					for (k = 0; k < moedas_carteira[7:0]; k = k+1)
+					begin
+						if((25*k + 50*j + 100*i) == valor_troco)
+						begin
+							moedas[7:0] = k;
+						    moedas[15:8] = j;
+						    moedas[23:16] = i;
+							calcular_moedas_troco = moedas;
+							break;
+						end
+					end
+					k=0;
 				end
+				j=0;
 			end
+			moedas_troco = 0;
 		end
 	endfunction
 		
