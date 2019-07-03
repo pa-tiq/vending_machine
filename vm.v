@@ -1,7 +1,8 @@
 module vm(escolher,inserir_dinheiro,dar_troco,
 produto_escolhido, dinheiro_inserido, produto_vendido,
 carteira,valor_troco,dinheiro_inserido_c, dinheiro_inserido_d,
-dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
+dinheiro_inserido_u, reset_n,clock,  moedas_inseridas_25, moedas_inseridas_50, 
+moedas_inseridas_100, moedas_carteira_25, moedas_carteira_50, moedas_carteira_100);
 
 	input[1:0] escolher, inserir_dinheiro, dar_troco;
 	input[7:0] produto_escolhido, dinheiro_inserido;
@@ -10,21 +11,19 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 	output reg[7:0] produto_vendido, carteira, valor_troco;
 	output reg[3:0]	dinheiro_inserido_c, dinheiro_inserido_d, dinheiro_inserido_u;
 	
-	input[23:0] moedas_inseridas;
-	output reg[23:0] moedas_carteira;
-	//moedas[7:0] = moedas de R$0,25
-	//moedas[15:8] = moedas de R$0,50
-	//moedas[23:16] = moedas de R$1,00
+	input[7:0] moedas_inseridas_25, moedas_inseridas_50, moedas_inseridas_100;
+	output reg[7:0] moedas_carteira_25, moedas_carteira_50, moedas_carteira_100;
 	
 	reg[1:0] estado_atual;
 	reg[7:0] price;
 	reg[11:0] cdu;
-	reg[7:0] moedas_25,moedas_50,moedas_100;
-	reg[23:0] moedas_troco;
+	reg[7:0] moedas_troco_25,moedas_troco_50,moedas_troco_100;
+	reg[23:0] troco_calculado;
 	reg[1:0] flag_sem_troco_devolver_dinheiro_inserido;
-	reg[1:0] flag_dinheiro_insuficiente;
-	
+	reg[1:0] flag_dinheiro_insuficiente;	
 	reg[1:0] executou_start, executou_insert_money, executou_give_change;
+	
+	
 	
 	parameter espera=0,start=1,insert_money=2,give_change=3;
 	
@@ -41,8 +40,12 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 			dinheiro_inserido_u = 0;
 			produto_vendido = 0;
 			cdu=0;
-			moedas_carteira = 0;
-			moedas_troco = 0;
+			moedas_carteira_25 = 0;
+			moedas_carteira_50 = 0;
+			moedas_carteira_100 = 0;
+			moedas_troco_25 = 0;
+			moedas_troco_50 = 0;
+			moedas_troco_100 = 0;
 			executou_start = 0;
 			executou_insert_money = 0;
 			executou_give_change = 0;
@@ -59,7 +62,9 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 				dinheiro_inserido_d = 0;
 				dinheiro_inserido_u = 0;
 				produto_vendido = 0;
-				moedas_troco = 0;
+				moedas_troco_25 = 0;
+				moedas_troco_50 = 0;
+				moedas_troco_100 = 0;
 				cdu=0;	
 				executou_start = 0;
 				executou_insert_money = 0;
@@ -87,7 +92,10 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 					dinheiro_inserido_c = cdu[11:8];
 					dinheiro_inserido_d = cdu[7:4];
 					dinheiro_inserido_u = cdu[3:0];
-					moedas_carteira = moedas_carteira + moedas_inseridas;
+					moedas_carteira_25 = moedas_carteira_25 + moedas_inseridas_25;
+					moedas_carteira_50 = moedas_carteira_50 + moedas_inseridas_50;
+					moedas_carteira_100 = moedas_carteira_100 + moedas_inseridas_100;
+					valor_troco = dinheiro_inserido - price;
 				end
 				executou_insert_money = 1;
 			end
@@ -95,26 +103,41 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 				if(!executou_give_change) begin
 					if(dinheiro_inserido>=price) begin				
 						valor_troco = dinheiro_inserido - price;
-						if(valor_troco>0) moedas_troco = calcular_moedas_troco(valor_troco,moedas_carteira);
-						else moedas_troco = moedas_inseridas;
-						if(moedas_troco != 0) begin
-							moedas_carteira = moedas_carteira - moedas_troco;
+						if(valor_troco>0)begin
+							troco_calculado = calcular_moedas_troco(valor_troco,moedas_carteira_25,
+												moedas_carteira_50,moedas_carteira_100);
+							moedas_troco_25 = troco_calculado[7:0];
+							moedas_troco_50 = troco_calculado[15:8];
+							moedas_troco_100 = troco_calculado[23:16];
+						end
+						if(moedas_troco_25 != 0 || moedas_troco_50 != 0 || moedas_troco_100 != 0) begin
+							moedas_carteira_25 = moedas_carteira_25 - moedas_troco_25;
+							moedas_carteira_50 = moedas_carteira_50 - moedas_troco_50;
+							moedas_carteira_100 = moedas_carteira_100 - moedas_troco_100;
 							carteira = carteira + price;
 							produto_vendido = produto_escolhido;
 						end
 						else begin
 							flag_sem_troco_devolver_dinheiro_inserido = 1;
 							valor_troco = dinheiro_inserido;
-							moedas_carteira = moedas_carteira - moedas_inseridas;
-							moedas_troco = moedas_inseridas;
+							moedas_carteira_25 = moedas_carteira_25 - moedas_inseridas_25;
+							moedas_carteira_50 = moedas_carteira_50 - moedas_inseridas_50;
+							moedas_carteira_100 = moedas_carteira_100 - moedas_inseridas_100;
+							moedas_troco_25 = moedas_inseridas_25;
+							moedas_troco_50 = moedas_inseridas_50;
+							moedas_troco_100 = moedas_inseridas_100;
 							produto_vendido = 0;
 						end
 					end
 					else begin
 						flag_dinheiro_insuficiente = 1;
 						valor_troco = dinheiro_inserido;
-						moedas_carteira = moedas_carteira - moedas_inseridas;
-						moedas_troco = moedas_inseridas;
+						moedas_carteira_25 = moedas_carteira_25 - moedas_inseridas_25;
+						moedas_carteira_50 = moedas_carteira_50 - moedas_inseridas_50;
+						moedas_carteira_100 = moedas_carteira_100 - moedas_inseridas_100;
+						moedas_troco_25 = moedas_inseridas_25;
+						moedas_troco_50 = moedas_inseridas_50;
+						moedas_troco_100 = moedas_inseridas_100;
 						produto_vendido = 0;
 					end
 				end
@@ -160,16 +183,20 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 	function automatic [23:0] calcular_moedas_troco;
 		
 		input [7:0] troco;
-		input [23:0] moedascarteira;
+		input [7:0] moedas_25;
+		input [7:0] moedas_50;
+		input [7:0] moedas_100;
 		reg [23:0] moedas;
 		reg [3:0] i,j,k;
+		reg [1:0] sair;
 		
 		begin
-			for (i = 0; i < moedascarteira[23:16]; i = i+1)
+			sair = 0;
+			for (i = 0; i <= moedas_100; i = i+1)
 			begin
-				for (j = 0; j < moedascarteira[15:8]; j = j+1)
+				for (j = 0; j <= moedas_50; j = j+1)
 				begin
-					for (k = 0; k < moedascarteira[7:0]; k = k+1)
+					for (k = 0; k <= moedas_25; k = k+1)
 					begin
 						if((25*k + 50*j + 100*i) == troco)
 						begin
@@ -177,11 +204,16 @@ dinheiro_inserido_u, reset_n,clock, moedas_inseridas,moedas_carteira);
 						    moedas[15:8] = j;
 						    moedas[23:16] = i;
 							calcular_moedas_troco = moedas;
+							i = moedas_100+1;
+							j = moedas_50+1;
+							k = moedas_25+1;
+							sair = 1;
 						end
 					end
-					k=0;
+					if(!sair)k=0;
 				end
-				j=0;
+				if(!sair)k=0;
+				if(!sair)j=0;
 			end
 			calcular_moedas_troco = 0;
 		end

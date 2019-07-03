@@ -1,5 +1,5 @@
 $date
-	Mon Jul 01 23:56:47 2019
+	Tue Jul 02 22:10:07 2019
 $end
 $version
 	Icarus Verilog
@@ -11,53 +11,66 @@ $scope module main $end
 $var wire 8 ! w_valor_troco [7:0] $end
 $var wire 8 " w_produto_vendido [7:0] $end
 $var wire 8 # w_produto_escolhido [7:0] $end
-$var wire 24 $ w_moedas_inseridas [23:0] $end
-$var wire 24 % w_moedas_carteira [23:0] $end
-$var wire 2 & w_inserir_dinheiro [1:0] $end
-$var wire 2 ' w_escolher [1:0] $end
-$var wire 4 ( w_dinheiro_inserido_u [3:0] $end
-$var wire 4 ) w_dinheiro_inserido_d [3:0] $end
-$var wire 4 * w_dinheiro_inserido_c [3:0] $end
-$var wire 8 + w_dinheiro_inserido [7:0] $end
-$var wire 2 , w_dar_troco [1:0] $end
-$var wire 8 - w_carteira [7:0] $end
-$var reg 1 . clock $end
-$var reg 1 / reset_n $end
+$var wire 8 $ w_moedas_inseridas_50 [7:0] $end
+$var wire 8 % w_moedas_inseridas_25 [7:0] $end
+$var wire 8 & w_moedas_inseridas_100 [7:0] $end
+$var wire 8 ' w_moedas_carteira_50 [7:0] $end
+$var wire 8 ( w_moedas_carteira_25 [7:0] $end
+$var wire 8 ) w_moedas_carteira_100 [7:0] $end
+$var wire 2 * w_inserir_dinheiro [1:0] $end
+$var wire 2 + w_escolher [1:0] $end
+$var wire 4 , w_dinheiro_inserido_u [3:0] $end
+$var wire 4 - w_dinheiro_inserido_d [3:0] $end
+$var wire 4 . w_dinheiro_inserido_c [3:0] $end
+$var wire 8 / w_dinheiro_inserido [7:0] $end
+$var wire 2 0 w_dar_troco [1:0] $end
+$var wire 8 1 w_carteira [7:0] $end
+$var reg 1 2 clock $end
+$var reg 1 3 reset_n $end
 $scope module source $end
-$var wire 1 . clock $end
-$var wire 1 / reset_n $end
-$var reg 2 0 dar_troco [1:0] $end
-$var reg 8 1 dinheiro_inserido [7:0] $end
-$var reg 2 2 escolher [1:0] $end
-$var reg 2 3 inserir_dinheiro [1:0] $end
-$var reg 24 4 moedas_inseridas [23:0] $end
-$var reg 8 5 produto_escolhido [7:0] $end
+$var wire 1 2 clock $end
+$var wire 1 3 reset_n $end
+$var reg 2 4 dar_troco [1:0] $end
+$var reg 8 5 dinheiro_inserido [7:0] $end
+$var reg 2 6 escolher [1:0] $end
+$var reg 2 7 inserir_dinheiro [1:0] $end
+$var reg 8 8 moedas_inseridas_100 [7:0] $end
+$var reg 8 9 moedas_inseridas_25 [7:0] $end
+$var reg 8 : moedas_inseridas_50 [7:0] $end
+$var reg 8 ; produto_escolhido [7:0] $end
 $upscope $end
 $scope module vm $end
-$var wire 1 . clock $end
-$var wire 2 6 dar_troco [1:0] $end
-$var wire 8 7 dinheiro_inserido [7:0] $end
-$var wire 2 8 escolher [1:0] $end
-$var wire 2 9 inserir_dinheiro [1:0] $end
-$var wire 24 : moedas_inseridas [23:0] $end
-$var wire 8 ; produto_escolhido [7:0] $end
-$var wire 1 / reset_n $end
-$var reg 8 < carteira [7:0] $end
-$var reg 12 = cdu [11:0] $end
-$var reg 4 > dinheiro_inserido_c [3:0] $end
-$var reg 4 ? dinheiro_inserido_d [3:0] $end
-$var reg 4 @ dinheiro_inserido_u [3:0] $end
-$var reg 2 A estado_atual [1:0] $end
-$var reg 2 B executou_give_change [1:0] $end
-$var reg 2 C executou_insert_money [1:0] $end
-$var reg 2 D executou_start [1:0] $end
-$var reg 2 E flag_dinheiro_insuficiente [1:0] $end
-$var reg 2 F flag_sem_troco_devolver_dinheiro_inserido [1:0] $end
-$var reg 24 G moedas_carteira [23:0] $end
-$var reg 24 H moedas_troco [23:0] $end
-$var reg 8 I price [7:0] $end
-$var reg 8 J produto_vendido [7:0] $end
-$var reg 8 K valor_troco [7:0] $end
+$var wire 1 2 clock $end
+$var wire 2 < dar_troco [1:0] $end
+$var wire 8 = dinheiro_inserido [7:0] $end
+$var wire 2 > escolher [1:0] $end
+$var wire 2 ? inserir_dinheiro [1:0] $end
+$var wire 8 @ moedas_inseridas_100 [7:0] $end
+$var wire 8 A moedas_inseridas_25 [7:0] $end
+$var wire 8 B moedas_inseridas_50 [7:0] $end
+$var wire 8 C produto_escolhido [7:0] $end
+$var wire 1 3 reset_n $end
+$var reg 8 D carteira [7:0] $end
+$var reg 12 E cdu [11:0] $end
+$var reg 4 F dinheiro_inserido_c [3:0] $end
+$var reg 4 G dinheiro_inserido_d [3:0] $end
+$var reg 4 H dinheiro_inserido_u [3:0] $end
+$var reg 2 I estado_atual [1:0] $end
+$var reg 2 J executou_give_change [1:0] $end
+$var reg 2 K executou_insert_money [1:0] $end
+$var reg 2 L executou_start [1:0] $end
+$var reg 2 M flag_dinheiro_insuficiente [1:0] $end
+$var reg 2 N flag_sem_troco_devolver_dinheiro_inserido [1:0] $end
+$var reg 8 O moedas_carteira_100 [7:0] $end
+$var reg 8 P moedas_carteira_25 [7:0] $end
+$var reg 8 Q moedas_carteira_50 [7:0] $end
+$var reg 8 R moedas_troco_100 [7:0] $end
+$var reg 8 S moedas_troco_25 [7:0] $end
+$var reg 8 T moedas_troco_50 [7:0] $end
+$var reg 8 U price [7:0] $end
+$var reg 8 V produto_vendido [7:0] $end
+$var reg 24 W troco_calculado [23:0] $end
+$var reg 8 X valor_troco [7:0] $end
 $scope function bin2bcd $end
 $upscope $end
 $scope function calcular_moedas_troco $end
@@ -67,6 +80,19 @@ $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
+b0 X
+bx W
+b0 V
+b0 U
+b0 T
+b0 S
+b0 R
+b0 Q
+b0 P
+b0 O
+b0 N
+b0 M
+b0 L
 b0 K
 b0 J
 b0 I
@@ -91,12 +117,12 @@ b0 7
 b0 6
 b0 5
 b0 4
-b0 3
-b0 2
+03
+02
 b0 1
 b0 0
-0/
-0.
+b0 /
+b0 .
 b0 -
 b0 ,
 b0 +
@@ -112,735 +138,760 @@ b0 "
 b0 !
 $end
 #1
-1.
+12
 #2
-0.
+02
 #3
-1.
+12
 #4
-0.
+02
 #5
-1.
+12
 #6
-0.
+02
 #7
-1.
+12
 #8
-0.
+02
 #9
-1.
+12
 #10
-0.
-1/
+02
+13
 b1 #
-b1 5
 b1 ;
-b1 '
-b1 2
-b1 8
+b1 C
+b1 +
+b1 6
+b1 >
 #11
-b1 A
-1.
+b1 I
+12
 #12
-0.
+02
 #13
-b1 D
-b110010 I
-1.
+b1 L
+b110010 U
+12
 #14
-0.
+02
 #15
-1.
+12
 #16
-0.
+02
 #17
-1.
+12
 #18
-0.
+02
 #19
-1.
+12
 #20
-0.
-b10000000100000000 $
-b10000000100000000 4
-b10000000100000000 :
-b10010110 +
-b10010110 1
-b10010110 7
+02
 b1 &
-b1 3
-b1 9
-b0 '
-b0 2
-b0 8
-#21
-b10 A
-1.
-#22
-0.
-#23
-b1 C
-b10000000100000000 %
-b10000000100000000 G
-b101 )
-b101 ?
-b1 *
-b1 >
-b101010000 =
-1.
-#24
-0.
-#25
-1.
-#26
-0.
-#27
-1.
-#28
-0.
-#29
-1.
-#30
-0.
-b1 ,
-b1 0
-b1 6
-b0 &
-b0 3
-b0 9
-#31
-b11 A
-1.
-#32
-0.
-#33
-b1 B
-b10000000100000000 H
-b0 %
-b0 G
-b1 F
-b10010110 !
-b10010110 K
-1.
-#34
-0.
-#35
-1.
-#36
-0.
-#37
-1.
-#38
-0.
-#39
-1.
-#40
-0.
-#41
-1.
-#42
-0.
-#43
-1.
-#44
-0.
-#45
-1.
-#46
-0.
-#47
-1.
-#48
-0.
-#49
-1.
-#50
-0.
-#51
-1.
-#52
-0.
-#53
-1.
-#54
-0.
-#55
-1.
-#56
-0.
-#57
-1.
-#58
-0.
-#59
-1.
-#60
-0.
-b0 $
-b0 4
-b0 :
-b0 +
-b0 1
-b0 7
-b0 #
-b0 5
-b0 ;
-b0 ,
-b0 0
-b0 6
-#61
-1.
-#62
-0.
-#63
-1.
-#64
-0.
-#65
-1.
-#66
-0.
-#67
-1.
-#68
-0.
-#69
-1.
-#70
-0.
-b10 #
-b10 5
-b10 ;
-b1 '
-b1 2
 b1 8
-#71
-b0 A
-1.
-#72
-0.
-#73
-b1 A
-b0 B
-b0 C
-b0 D
-b0 =
-b0 H
-b0 )
-b0 ?
-b0 *
-b0 >
-b0 !
-b0 K
-b0 I
-b0 F
-1.
-#74
-0.
-#75
-b1 D
-b1001011 I
-1.
-#76
-0.
-#77
-1.
-#78
-0.
-#79
-1.
-#80
-0.
-b100000010 $
-b100000010 4
-b100000010 :
-b1100100 +
-b1100100 1
-b1100100 7
-b1 &
-b1 3
-b1 9
-b0 '
-b0 2
-b0 8
-#81
-b10 A
-1.
-#82
-0.
-#83
-b1 C
-b100000010 %
-b100000010 G
-b1 *
-b1 >
-b100000000 =
-1.
-#84
-0.
-#85
-1.
-#86
-0.
-#87
-1.
-#88
-0.
-#89
-1.
-#90
-0.
-b1 ,
-b1 0
-b1 6
-b0 &
-b0 3
-b0 9
-#91
-b11 A
-1.
-#92
-0.
-#93
+b1 @
+b1 $
+b1 :
 b1 B
-b100000010 H
-b0 %
-b0 G
-b1 F
+b10010110 /
+b10010110 5
+b10010110 =
+b1 *
+b1 7
+b1 ?
+b0 +
+b0 6
+b0 >
+#21
+b10 I
+12
+#22
+02
+#23
+b1 K
 b1100100 !
-b1100100 K
-1.
+b1100100 X
+b1 )
+b1 O
+b1 '
+b1 Q
+b101 -
+b101 G
+b1 .
+b1 F
+b101010000 E
+12
+#24
+02
+#25
+12
+#26
+02
+#27
+12
+#28
+02
+#29
+12
+#30
+02
+b1 0
+b1 4
+b1 <
+b0 *
+b0 7
+b0 ?
+#31
+b11 I
+12
+#32
+02
+#33
+b1 J
+b1 R
+b1 T
+b0 )
+b0 O
+b0 '
+b0 Q
+b10010110 !
+b10010110 X
+b1 N
+b0 W
+12
+#34
+02
+#35
+12
+#36
+02
+#37
+12
+#38
+02
+#39
+12
+#40
+02
+#41
+12
+#42
+02
+#43
+12
+#44
+02
+#45
+12
+#46
+02
+#47
+12
+#48
+02
+#49
+12
+#50
+02
+#51
+12
+#52
+02
+#53
+12
+#54
+02
+#55
+12
+#56
+02
+#57
+12
+#58
+02
+#59
+12
+#60
+02
+b0 &
+b0 8
+b0 @
+b0 $
+b0 :
+b0 B
+b0 /
+b0 5
+b0 =
+b0 #
+b0 ;
+b0 C
+b0 0
+b0 4
+b0 <
+#61
+12
+#62
+02
+#63
+12
+#64
+02
+#65
+12
+#66
+02
+#67
+12
+#68
+02
+#69
+12
+#70
+02
+b10 #
+b10 ;
+b10 C
+b1 +
+b1 6
+b1 >
+#71
+b0 I
+12
+#72
+02
+#73
+b1 I
+b0 J
+b0 K
+b0 L
+b0 E
+b0 R
+b0 T
+b0 -
+b0 G
+b0 .
+b0 F
+b0 !
+b0 X
+b0 U
+b0 N
+12
+#74
+02
+#75
+b1 L
+b1001011 U
+12
+#76
+02
+#77
+12
+#78
+02
+#79
+12
+#80
+02
+b1 $
+b1 :
+b1 B
+b10 %
+b10 9
+b10 A
+b1100100 /
+b1100100 5
+b1100100 =
+b1 *
+b1 7
+b1 ?
+b0 +
+b0 6
+b0 >
+#81
+b10 I
+12
+#82
+02
+#83
+b1 K
+b11001 !
+b11001 X
+b1 '
+b1 Q
+b10 (
+b10 P
+b1 .
+b1 F
+b100000000 E
+12
+#84
+02
+#85
+12
+#86
+02
+#87
+12
+#88
+02
+#89
+12
+#90
+02
+b1 0
+b1 4
+b1 <
+b0 *
+b0 7
+b0 ?
+#91
+b11 I
+12
+#92
+02
+#93
+b1 J
+b1 T
+b10 S
+b0 '
+b0 Q
+b0 (
+b0 P
+b1100100 !
+b1100100 X
+b1 N
+12
 #94
-0.
+02
 #95
-1.
+12
 #96
-0.
+02
 #97
-1.
+12
 #98
-0.
+02
 #99
-1.
+12
 #100
-0.
+02
 #101
-1.
+12
 #102
-0.
+02
 #103
-1.
+12
 #104
-0.
+02
 #105
-1.
+12
 #106
-0.
+02
 #107
-1.
+12
 #108
-0.
+02
 #109
-1.
+12
 #110
-0.
+02
 #111
-1.
+12
 #112
-0.
+02
 #113
-1.
+12
 #114
-0.
+02
 #115
-1.
+12
 #116
-0.
+02
 #117
-1.
+12
 #118
-0.
+02
 #119
-1.
+12
 #120
-0.
+02
 #121
-1.
+12
 #122
-0.
+02
 #123
-1.
+12
 #124
-0.
+02
 #125
-1.
+12
 #126
-0.
+02
 #127
-1.
+12
 #128
-0.
+02
 #129
-1.
+12
 #130
-0.
+02
 #131
-1.
+12
 #132
-0.
+02
 #133
-1.
+12
 #134
-0.
+02
 #135
-1.
+12
 #136
-0.
+02
 #137
-1.
+12
 #138
-0.
+02
 #139
-1.
+12
 #140
-0.
+02
 #141
-1.
+12
 #142
-0.
+02
 #143
-1.
+12
 #144
-0.
+02
 #145
-1.
+12
 #146
-0.
+02
 #147
-1.
+12
 #148
-0.
+02
 #149
-1.
+12
 #150
-0.
+02
 #151
-1.
+12
 #152
-0.
+02
 #153
-1.
+12
 #154
-0.
+02
 #155
-1.
+12
 #156
-0.
+02
 #157
-1.
+12
 #158
-0.
+02
 #159
-1.
+12
 #160
-0.
+02
 #161
-1.
+12
 #162
-0.
+02
 #163
-1.
+12
 #164
-0.
+02
 #165
-1.
+12
 #166
-0.
+02
 #167
-1.
+12
 #168
-0.
+02
 #169
-1.
+12
 #170
-0.
+02
 #171
-1.
+12
 #172
-0.
+02
 #173
-1.
+12
 #174
-0.
+02
 #175
-1.
+12
 #176
-0.
+02
 #177
-1.
+12
 #178
-0.
+02
 #179
-1.
+12
 #180
-0.
+02
 #181
-1.
+12
 #182
-0.
+02
 #183
-1.
+12
 #184
-0.
+02
 #185
-1.
+12
 #186
-0.
+02
 #187
-1.
+12
 #188
-0.
+02
 #189
-1.
+12
 #190
-0.
+02
 #191
-1.
+12
 #192
-0.
+02
 #193
-1.
+12
 #194
-0.
+02
 #195
-1.
+12
 #196
-0.
+02
 #197
-1.
+12
 #198
-0.
+02
 #199
-1.
+12
 #200
-0.
+02
 #201
-1.
+12
 #202
-0.
+02
 #203
-1.
+12
 #204
-0.
+02
 #205
-1.
+12
 #206
-0.
+02
 #207
-1.
+12
 #208
-0.
+02
 #209
-1.
+12
 #210
-0.
+02
 #211
-1.
+12
 #212
-0.
+02
 #213
-1.
+12
 #214
-0.
+02
 #215
-1.
+12
 #216
-0.
+02
 #217
-1.
+12
 #218
-0.
+02
 #219
-1.
+12
 #220
-0.
+02
 #221
-1.
+12
 #222
-0.
+02
 #223
-1.
+12
 #224
-0.
+02
 #225
-1.
+12
 #226
-0.
+02
 #227
-1.
+12
 #228
-0.
+02
 #229
-1.
+12
 #230
-0.
+02
 #231
-1.
+12
 #232
-0.
+02
 #233
-1.
+12
 #234
-0.
+02
 #235
-1.
+12
 #236
-0.
+02
 #237
-1.
+12
 #238
-0.
+02
 #239
-1.
+12
 #240
-0.
+02
 #241
-1.
+12
 #242
-0.
+02
 #243
-1.
+12
 #244
-0.
+02
 #245
-1.
+12
 #246
-0.
+02
 #247
-1.
+12
 #248
-0.
+02
 #249
-1.
+12
 #250
-0.
+02
 #251
-1.
+12
 #252
-0.
+02
 #253
-1.
+12
 #254
-0.
+02
 #255
-1.
+12
 #256
-0.
+02
 #257
-1.
+12
 #258
-0.
+02
 #259
-1.
+12
 #260
-0.
+02
 #261
-1.
+12
 #262
-0.
+02
 #263
-1.
+12
 #264
-0.
+02
 #265
-1.
+12
 #266
-0.
+02
 #267
-1.
+12
 #268
-0.
+02
 #269
-1.
+12
 #270
-0.
+02
 #271
-1.
+12
 #272
-0.
+02
 #273
-1.
+12
 #274
-0.
+02
 #275
-1.
+12
 #276
-0.
+02
 #277
-1.
+12
 #278
-0.
+02
 #279
-1.
+12
 #280
-0.
+02
 #281
-1.
+12
 #282
-0.
+02
 #283
-1.
+12
 #284
-0.
+02
 #285
-1.
+12
 #286
-0.
+02
 #287
-1.
+12
 #288
-0.
+02
 #289
-1.
+12
 #290
-0.
+02
 #291
-1.
+12
 #292
-0.
+02
 #293
-1.
+12
 #294
-0.
+02
 #295
-1.
+12
 #296
-0.
+02
 #297
-1.
+12
 #298
-0.
+02
 #299
-1.
+12
 #300
-0.
+02
 #301
-1.
+12
 #302
-0.
+02
 #303
-1.
+12
 #304
-0.
+02
 #305
-1.
+12
 #306
-0.
+02
 #307
-1.
+12
 #308
-0.
+02
 #309
-1.
+12
 #310
-0.
+02
