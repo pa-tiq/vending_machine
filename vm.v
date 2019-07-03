@@ -21,9 +21,7 @@ moedas_inseridas_100, moedas_carteira_25, moedas_carteira_50, moedas_carteira_10
 	reg[23:0] troco_calculado;
 	reg[1:0] flag_sem_troco_devolver_dinheiro_inserido;
 	reg[1:0] flag_dinheiro_insuficiente;	
-	reg[1:0] executou_start, executou_insert_money, executou_give_change;
-	
-	
+	reg[1:0] executou_start, executou_insert_money, executou_give_change;	
 	
 	parameter espera=0,start=1,insert_money=2,give_change=3;
 	
@@ -49,6 +47,7 @@ moedas_inseridas_100, moedas_carteira_25, moedas_carteira_50, moedas_carteira_10
 			executou_start = 0;
 			executou_insert_money = 0;
 			executou_give_change = 0;
+			troco_calculado = 0;
 		end
 		else
 		case(estado_atual)
@@ -68,7 +67,8 @@ moedas_inseridas_100, moedas_carteira_25, moedas_carteira_50, moedas_carteira_10
 				cdu=0;	
 				executou_start = 0;
 				executou_insert_money = 0;
-				executou_give_change = 0;				
+				executou_give_change = 0;	
+				troco_calculado = 0;
 			end
 			start:begin
 				if(!executou_start) begin
@@ -95,7 +95,6 @@ moedas_inseridas_100, moedas_carteira_25, moedas_carteira_50, moedas_carteira_10
 					moedas_carteira_25 = moedas_carteira_25 + moedas_inseridas_25;
 					moedas_carteira_50 = moedas_carteira_50 + moedas_inseridas_50;
 					moedas_carteira_100 = moedas_carteira_100 + moedas_inseridas_100;
-					valor_troco = dinheiro_inserido - price;
 				end
 				executou_insert_money = 1;
 			end
@@ -192,6 +191,7 @@ moedas_inseridas_100, moedas_carteira_25, moedas_carteira_50, moedas_carteira_10
 		
 		begin
 			sair = 0;
+			moedas = 0;
 			for (i = 0; i <= moedas_100; i = i+1)
 			begin
 				for (j = 0; j <= moedas_50; j = j+1)
@@ -203,7 +203,6 @@ moedas_inseridas_100, moedas_carteira_25, moedas_carteira_50, moedas_carteira_10
 							moedas[7:0] = k;
 						    moedas[15:8] = j;
 						    moedas[23:16] = i;
-							calcular_moedas_troco = moedas;
 							i = moedas_100+1;
 							j = moedas_50+1;
 							k = moedas_25+1;
@@ -212,10 +211,12 @@ moedas_inseridas_100, moedas_carteira_25, moedas_carteira_50, moedas_carteira_10
 					end
 					if(!sair)k=0;
 				end
-				if(!sair)k=0;
-				if(!sair)j=0;
+				if(!sair) begin
+					k=0;
+					j=0;
+				end
 			end
-			calcular_moedas_troco = 0;
+			calcular_moedas_troco = moedas;
 		end
 	endfunction
 		
