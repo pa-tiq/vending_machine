@@ -1,0 +1,48 @@
+
+State Machine - |vending_machine|dar_troco
+Name dar_troco.01 
+dar_troco.00 0 
+dar_troco.01 1 
+
+State Machine - |vending_machine|inserir_dinheiro
+Name inserir_dinheiro.01 
+inserir_dinheiro.00 0 
+inserir_dinheiro.01 1 
+
+State Machine - |vending_machine|estado_atual
+Name estado_atual.0011 estado_atual.0010 estado_atual.0001 estado_atual.0000 estado_atual.0100 
+estado_atual.0000 0 0 0 0 0 
+estado_atual.0001 0 0 1 1 0 
+estado_atual.0010 0 1 0 1 0 
+estado_atual.0011 1 0 0 1 0 
+estado_atual.0100 0 0 0 1 1 
+
+State Machine - |vending_machine|produto_escolhido
+Name produto_escolhido.00000011 produto_escolhido.00000010 produto_escolhido.00000001 produto_escolhido.00000000 
+produto_escolhido.00000000 0 0 0 0 
+produto_escolhido.00000001 0 0 1 1 
+produto_escolhido.00000010 0 1 0 1 
+produto_escolhido.00000011 1 0 0 1 
+
+State Machine - |vending_machine|flag_um_de_cada_vez
+Name flag_um_de_cada_vez.0011 flag_um_de_cada_vez.0010 flag_um_de_cada_vez.0001 flag_um_de_cada_vez.0000 flag_um_de_cada_vez.1000 
+flag_um_de_cada_vez.0000 0 0 0 0 0 
+flag_um_de_cada_vez.0001 0 0 1 1 0 
+flag_um_de_cada_vez.0010 0 1 0 1 0 
+flag_um_de_cada_vez.0011 1 0 0 1 0 
+flag_um_de_cada_vez.1000 0 0 0 1 1 
+
+State Machine - |vending_machine|flag_sem_troco_devolver_dinheiro_inserido
+Name flag_sem_troco_devolver_dinheiro_inserido.01 
+flag_sem_troco_devolver_dinheiro_inserido.00 0 
+flag_sem_troco_devolver_dinheiro_inserido.01 1 
+
+State Machine - |vending_machine|flag_dinheiro_insuficiente
+Name flag_dinheiro_insuficiente.01 
+flag_dinheiro_insuficiente.00 0 
+flag_dinheiro_insuficiente.01 1 
+
+State Machine - |vending_machine|key0
+Name key0.01 
+key0.00 0 
+key0.01 1 

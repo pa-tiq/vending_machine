@@ -1,0 +1,461 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "produto_vendido[0]",
+					"strict" : false
+				},
+				{
+					"name" : "produto_vendido[1]",
+					"strict" : false
+				},
+				{
+					"name" : "carteira[0]",
+					"strict" : false
+				},
+				{
+					"name" : "carteira[1]",
+					"strict" : false
+				},
+				{
+					"name" : "carteira[2]",
+					"strict" : false
+				},
+				{
+					"name" : "carteira[3]",
+					"strict" : false
+				},
+				{
+					"name" : "carteira[4]",
+					"strict" : false
+				},
+				{
+					"name" : "carteira[5]",
+					"strict" : false
+				},
+				{
+					"name" : "carteira[6]",
+					"strict" : false
+				},
+				{
+					"name" : "carteira[7]",
+					"strict" : false
+				},
+				{
+					"name" : "valor_troco[0]",
+					"strict" : false
+				},
+				{
+					"name" : "valor_troco[1]",
+					"strict" : false
+				},
+				{
+					"name" : "valor_troco[2]",
+					"strict" : false
+				},
+				{
+					"name" : "valor_troco[3]",
+					"strict" : false
+				},
+				{
+					"name" : "valor_troco[4]",
+					"strict" : false
+				},
+				{
+					"name" : "valor_troco[5]",
+					"strict" : false
+				},
+				{
+					"name" : "valor_troco[6]",
+					"strict" : false
+				},
+				{
+					"name" : "valor_troco[7]",
+					"strict" : false
+				},
+				{
+					"name" : "dinheiro_inserido_c[0]",
+					"strict" : false
+				},
+				{
+					"name" : "dinheiro_inserido_c[1]",
+					"strict" : false
+				},
+				{
+					"name" : "dinheiro_inserido_d[0]",
+					"strict" : false
+				},
+				{
+					"name" : "dinheiro_inserido_d[1]",
+					"strict" : false
+				},
+				{
+					"name" : "dinheiro_inserido_d[2]",
+					"strict" : false
+				},
+				{
+					"name" : "dinheiro_inserido_d[3]",
+					"strict" : false
+				},
+				{
+					"name" : "dinheiro_inserido_u[0]",
+					"strict" : false
+				},
+				{
+					"name" : "dinheiro_inserido_u[1]",
+					"strict" : false
+				},
+				{
+					"name" : "dinheiro_inserido_u[2]",
+					"strict" : false
+				},
+				{
+					"name" : "dinheiro_inserido_u[3]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_25[0]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_25[1]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_25[2]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_25[3]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_25[4]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_25[5]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_25[6]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_25[7]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_50[0]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_50[1]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_50[2]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_50[3]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_50[4]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_50[5]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_50[6]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_50[7]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_100[0]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_100[1]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_100[2]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_100[3]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_100[4]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_100[5]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_100[6]",
+					"strict" : false
+				},
+				{
+					"name" : "moedas_carteira_100[7]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDR[9]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDR[8]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDR[7]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDR[6]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDR[5]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDR[4]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDR[3]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDR[2]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDR[1]",
+					"strict" : false
+				},
+				{
+					"name" : "LEDR[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[6]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX5[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX4[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX4[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX4[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX4[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[6]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX3[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[6]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[5]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[4]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[3]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[2]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[1]",
+					"strict" : false
+				},
+				{
+					"name" : "HEX0[0]",
+					"strict" : false
+				},
+				{
+					"name" : "SW[9]",
+					"strict" : false
+				},
+				{
+					"name" : "SW[8]",
+					"strict" : false
+				},
+				{
+					"name" : "SW[7]",
+					"strict" : false
+				},
+				{
+					"name" : "SW[6]",
+					"strict" : false
+				},
+				{
+					"name" : "SW[5]",
+					"strict" : false
+				},
+				{
+					"name" : "SW[4]",
+					"strict" : false
+				},
+				{
+					"name" : "SW[3]",
+					"strict" : false
+				},
+				{
+					"name" : "SW[2]",
+					"strict" : false
+				},
+				{
+					"name" : "SW[1]",
+					"strict" : false
+				},
+				{
+					"name" : "SW[0]",
+					"strict" : false
+				},
+				{
+					"name" : "clock",
+					"strict" : false
+				},
+				{
+					"name" : "KEY[0]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

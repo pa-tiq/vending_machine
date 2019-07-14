@@ -1,3 +1,3 @@
 # vending_machine
-verilog code for a vending machine prototyped using FPGA Max10
+verilog code for a vending machine prototyped using FPGA DE10
 
